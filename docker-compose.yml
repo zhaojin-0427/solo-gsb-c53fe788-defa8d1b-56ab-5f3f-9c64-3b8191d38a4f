@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: water-isolation-planner
+    ports:
+      - "8000:8000"
+    volumes:
+      - water_data:/data
+    restart: unless-stopped
+
+volumes:
+  water_data:

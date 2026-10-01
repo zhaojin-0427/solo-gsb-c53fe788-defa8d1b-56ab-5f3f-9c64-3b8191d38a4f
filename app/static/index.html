@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>供水检修隔离方案台</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>供水检修隔离方案台</h1>
+    <div class="toolbar" id="toolbar">
+      <button class="tool active" data-tool="select">选择 / 移动</button>
+      <button class="tool" data-tool="addSource">＋水源</button>
+      <button class="tool" data-tool="addUser">＋用水节点</button>
+      <button class="tool" data-tool="addEdge">＋管段</button>
+      <button class="tool danger" data-tool="delete">删除</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="canvas-wrap">
+      <canvas id="canvas" width="980" height="620"></canvas>
+      <div class="hint" id="hint">点击选择节点或管段；拖动可移动节点。</div>
+      <div class="legend">
+        <span><i class="dot source"></i>水源</span>
+        <span><i class="dot supplied"></i>供水节点</span>
+        <span><i class="dot unsupplied"></i>断供节点</span>
+        <span><i class="dot unknown"></i>未求解</span>
+        <span><i class="valve-ic"></i>阀门</span>
+        <span><i class="valve-ic closed"></i>已关阀门</span>
+        <span><i class="line-ic repair"></i>检修段</span>
+        <span><i class="ring-ic"></i>保供节点</span>
+      </div>
+    </section>
+
+    <aside>
+      <section class="panel">
+        <h2>场景</h2>
+        <div class="row">
+          <select id="scenarioList"></select>
+        </div>
+        <div class="row">
+          <button id="loadScenarioBtn">加载</button>
+          <button id="deleteScenarioBtn" class="danger">删除</button>
+          <button id="newScenarioBtn">新建</button>
+        </div>
+        <div class="row">
+          <input id="scenarioName" type="text" placeholder="场景名称" maxlength="120">
+          <button id="saveScenarioBtn" class="primary">保存</button>
+        </div>
+        <div class="row">
+          <button id="loadSampleBtn">载入示例管网</button>
+        </div>
+        <p class="muted small" id="scenarioMeta"></p>
+      </section>
+
+      <section class="panel">
+        <h2>属性</h2>
+        <div id="propBody"><p class="muted">未选中对象。点击画布中的节点或管段查看、编辑属性。</p></div>
+      </section>
+
+      <section class="panel">
+        <h2>求解</h2>
+        <p id="repairInfo" class="small"></p>
+        <button id="solveBtn" class="primary big">保存并求解</button>
+        <p class="muted small">目标：断供户数 → 关阀数 → 阀门 ID 升序，字典序最小；预算 10 秒。</p>
+      </section>
+
+      <section class="panel">
+        <h2>方案</h2>
+        <div id="resultBody"><p class="muted">尚未求解。</p></div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
